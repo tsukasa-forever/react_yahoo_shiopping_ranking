@@ -1,10 +1,14 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import logger from 'redux-logger';
 import { Provider } from 'react-redux';
 import App from './App';
-import * as reducers from './reducers';
+
+import createBrowserHistory from 'history/createBrowserHistory';
+const history = createBrowserHistory();
+
+import createStore from './createStore';
+const store = createStore();
+
 
 const store = createStore(
   // 1つのReducerで完結することはほぼないので
