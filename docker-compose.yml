@@ -1,0 +1,12 @@
+# https://qiita.com/mii288/items/aac597bc02575831ea90
+version: "2"
+services:
+  node:
+    build: ./docker
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - "127.0.0.1:3000:3000"
+    command: sh -c "npm install"
