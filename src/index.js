@@ -4,24 +4,21 @@ import { Provider } from 'react-redux';
 import App from './App';
 
 import createBrowserHistory from 'history/createBrowserHistory';
-const history = createBrowserHistory();
-
 import createStore from './createStore';
+import { ConnectedRouter } from 'react-router-redux';
+
+const history = createBrowserHistory();
 const store = createStore();
 
-
-const store = createStore(
-  // 1つのReducerで完結することはほぼないので
-  // 最初からcombineReducersを使う実装をしておく
-  combineReducers(reducers),
-
-  // Redux <iddlewareにredux-loggerを設定
-  applyMiddleware(logger)
-);
+// Linkコンポーネントなどが動作するように
+// react - router - domのRouterではなく
+// react - router - reduxのConnectedRouterを使う
 
 ReactDom.render(
   <Provider store={store}>
-    <App />
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 );

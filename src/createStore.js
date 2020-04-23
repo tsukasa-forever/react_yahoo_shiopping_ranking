@@ -4,7 +4,7 @@ import {
   combineReducers,
   applyMiddleware
 } from 'redux';
-import logger from 'redux-loger';
+import logger from 'redux-logger';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 import * as reducers from './reducers';
 
