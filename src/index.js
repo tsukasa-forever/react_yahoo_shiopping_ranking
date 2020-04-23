@@ -1,17 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import ReactDom from 'react-dom';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
+import { Provider } from 'react-redux';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import * as reducers from './reducers';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+const store = createStore(
+  // 1つのReducerで完結することはほぼないので
+  // 最初からcombineReducersを使う実装をしておく
+  combineReducers(reducers),
+
+  // Redux <iddlewareにredux-loggerを設定
+  applyMiddleware(logger)
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDom.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
